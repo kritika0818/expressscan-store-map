@@ -3,16 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <title>3D Store Viewer</title>
-  <style>
-    body { margin: 0; overflow: hidden; }
-    canvas { display: block; }
-  </style>
+  <style> body { margin: 0; overflow: hidden; } </style>
 </head>
 <body>
   <script type="module">
     import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.module.js';
-    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.150.1/examples/jsm/controls/OrbitControls.js';
     import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.150.1/examples/jsm/loaders/GLTFLoader.js';
+    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.150.1/examples/jsm/controls/OrbitControls.js';
 
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xf0f0f0);
@@ -28,7 +25,6 @@
     controls.update();
 
     const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
-    light.position.set(0, 20, 0);
     scene.add(light);
 
     const loader = new GLTFLoader();
