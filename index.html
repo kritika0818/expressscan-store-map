@@ -237,6 +237,34 @@
       -webkit-tap-highlight-color: transparent;
     }
   </style>
+  <script>
+    // Handle loading state properly
+    document.addEventListener('DOMContentLoaded', function() {
+      const modelViewer = document.getElementById('store-model');
+      const loadingOverlay = document.getElementById('loading-overlay');
+      
+      // Hide loading overlay when model is loaded
+      modelViewer.addEventListener('load', function() {
+        if (loadingOverlay) {
+          loadingOverlay.style.display = 'none';
+        }
+      });
+      
+      // Also hide on model-visibility event as backup
+      modelViewer.addEventListener('model-visibility', function(event) {
+        if (event.detail.visible && loadingOverlay) {
+          loadingOverlay.style.display = 'none';
+        }
+      });
+      
+      // Hide loading after a timeout as final fallback
+      setTimeout(function() {
+        if (loadingOverlay) {
+          loadingOverlay.style.display = 'none';
+        }
+      }, 10000); // 10 seconds timeout
+    });
+  </script>
 </head>
 <body>
   <div class="container">
@@ -251,6 +279,7 @@
     <div class="main-content">
       <div class="model-container">
         <model-viewer 
+          id="store-model"
           src="https://expressscan-store-map.vercel.app/store.glb"
           alt="Store Model"
           camera-controls
@@ -264,7 +293,7 @@
           interaction-prompt="none"
           disable-zoom
         >
-          <div class="loading-overlay" slot="progress-bar">
+          <div id="loading-overlay" class="loading-overlay" slot="progress-bar">
             <div class="loading-spinner"></div>
             <div class="loading-text">Loading 3D Store Model...</div>
           </div>
