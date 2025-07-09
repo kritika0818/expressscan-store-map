@@ -7,53 +7,249 @@
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <title>Store Model Viewer</title>
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      padding: 20px;
     }
 
-    .box {
+    .container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
-      padding: 20px;
-      border-radius: 12px;
-      background: #ffffff;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      gap: 30px;
+      padding: 40px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 8px 16px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      max-width: 900px;
+      width: 100%;
+      position: relative;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #2d3748;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: #718096;
+      font-weight: 500;
+      opacity: 0.8;
+    }
+
+    .model-container {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
 
     model-viewer {
-      width: 90vw;
+      width: 100%;
       max-width: 800px;
       height: 500px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
+      border-radius: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 
+        0 12px 24px rgba(0, 0, 0, 0.12),
+        0 4px 8px rgba(0, 0, 0, 0.08);
+      background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .text {
-      font-size: 20px;
-      font-weight: 600;
-      color: #333;
+    model-viewer:hover {
+      transform: translateY(-4px);
+      box-shadow: 
+        0 16px 32px rgba(0, 0, 0, 0.15),
+        0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .controls-info {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .control-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: rgba(103, 126, 234, 0.1);
+      border-radius: 20px;
+      border: 1px solid rgba(103, 126, 234, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .control-item:hover {
+      background: rgba(103, 126, 234, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .control-icon {
+      font-size: 18px;
+    }
+
+    .control-text {
+      font-size: 14px;
+      color: #4a5568;
+      font-weight: 500;
+    }
+
+    .loading-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 16px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #e2e8f0;
+      border-top: 4px solid #667eea;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .decorative-elements {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      opacity: 0.1;
+      z-index: -1;
+    }
+
+    .decorative-elements::before {
+      content: '';
+      position: absolute;
+      top: 80px;
+      left: -40px;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+      border-radius: 50%;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+        gap: 20px;
+      }
+
+      .title {
+        font-size: 24px;
+      }
+
+      model-viewer {
+        height: 400px;
+      }
+
+      .controls-info {
+        gap: 15px;
+      }
+
+      .control-item {
+        padding: 8px 12px;
+      }
+
+      .control-text {
+        font-size: 12px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="box">
-    <div class="text">🛒 3D Store Preview</div>
+  <div class="container">
+    <div class="decorative-elements"></div>
+    
+    <div class="header">
+      <div class="title">🛒 3D Store Preview</div>
+      <div class="subtitle">Interactive store layout visualization</div>
+    </div>
 
-    <model-viewer 
-      src="https://expressscan-store-map.vercel.app/store.glb"
-      alt="Store Model"
-      camera-controls
-      auto-rotate
-      orientation="180deg 0deg 0deg"  <!-- ← Try flipping on X axis -->
-    </model-viewer>
+    <div class="model-container">
+      <model-viewer 
+        src="https://expressscan-store-map.vercel.app/store.glb"
+        alt="Store Model"
+        camera-controls
+        auto-rotate
+        auto-rotate-delay="2000"
+        rotation-per-second="30deg"
+        orientation="180deg 0deg 0deg"
+        environment-image="neutral"
+        shadow-intensity="0.7"
+        exposure="1.2"
+        loading="eager"
+      >
+        <div class="loading-overlay" slot="progress-bar">
+          <div class="loading-spinner"></div>
+        </div>
+      </model-viewer>
+    </div>
+
+    <div class="controls-info">
+      <div class="control-item">
+        <div class="control-icon">🖱️</div>
+        <div class="control-text">Click & Drag to Rotate</div>
+      </div>
+      <div class="control-item">
+        <div class="control-icon">⚡</div>
+        <div class="control-text">Auto-Rotate Enabled</div>
+      </div>
+      <div class="control-item">
+        <div class="control-icon">🔍</div>
+        <div class="control-text">Scroll to Zoom</div>
+      </div>
+    </div>
   </div>
 </body>
 </html>
