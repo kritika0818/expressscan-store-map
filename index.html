@@ -45,12 +45,18 @@
 </head>
 <body>
   <div class="box">
-    <div class="text">Store Model Viewer</div>
+    <div class="text">🛒 3D Store Preview</div>
+
     <model-viewer 
-      camera-controls 
-      alt="Store Model" 
       src="https://expressscan-store-map.vercel.app/store.glb"
-      rotation="180deg 0deg 0deg">
+      alt="Store Model"
+      camera-controls
+      auto-rotate
+      orientation="180deg 0deg 0deg"  <!-- ← Try flipping on X axis -->
+      shadow-intensity="1"
+      exposure="1"
+      ar
+    >
     </model-viewer>
   </div>
 </body>
