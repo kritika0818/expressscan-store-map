@@ -14,116 +14,127 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #ffffff;
+      padding: 0;
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
     }
 
     .container {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 30px;
-      padding: 40px;
-      border-radius: 24px;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.1),
-        0 8px 16px rgba(0, 0, 0, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      max-width: 900px;
-      width: 100%;
-      position: relative;
+      height: 100vh;
+      background: #ffffff;
     }
 
     .header {
+      padding: 16px 20px 20px;
       text-align: center;
-      margin-bottom: 20px;
+      border-bottom: 1px solid #f0f4f8;
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
     }
 
     .title {
-      font-size: 32px;
-      font-weight: 800;
+      font-size: 20px;
+      font-weight: 700;
       color: #2d3748;
-      margin-bottom: 8px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      letter-spacing: 0.5px;
     }
 
     .subtitle {
-      font-size: 16px;
+      font-size: 14px;
       color: #718096;
       font-weight: 500;
       opacity: 0.8;
     }
 
-    .model-container {
-      position: relative;
-      width: 100%;
+    .main-content {
+      flex: 1;
+      padding: 16px;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      overflow: hidden;
+    }
+
+    .model-container {
+      flex: 1;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fafbfc;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
 
     model-viewer {
       width: 100%;
-      max-width: 800px;
-      height: 500px;
-      border-radius: 16px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 
-        0 12px 24px rgba(0, 0, 0, 0.12),
-        0 4px 8px rgba(0, 0, 0, 0.08);
+      height: 100%;
       background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 12px;
     }
 
-    model-viewer:hover {
-      transform: translateY(-4px);
-      box-shadow: 
-        0 16px 32px rgba(0, 0, 0, 0.15),
-        0 8px 16px rgba(0, 0, 0, 0.1);
+    .controls-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: linear-gradient(135deg, #0071CE 0%, #004A9F 100%);
+      border-radius: 12px;
+      color: white;
+      box-shadow: 0 2px 8px rgba(0, 113, 206, 0.2);
     }
 
     .controls-info {
       display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 20px;
+      gap: 20px;
       flex-wrap: wrap;
+      align-items: center;
     }
 
     .control-item {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 12px 16px;
-      background: rgba(103, 126, 234, 0.1);
-      border-radius: 20px;
-      border: 1px solid rgba(103, 126, 234, 0.2);
-      transition: all 0.3s ease;
-    }
-
-    .control-item:hover {
-      background: rgba(103, 126, 234, 0.15);
-      transform: translateY(-2px);
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #e8f4ff;
+      opacity: 0.9;
     }
 
     .control-icon {
-      font-size: 18px;
+      font-size: 14px;
+      filter: brightness(1.2);
     }
 
-    .control-text {
-      font-size: 14px;
-      color: #4a5568;
-      font-weight: 500;
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #48bb78;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.6; }
+      100% { opacity: 1; }
     }
 
     .loading-overlay {
@@ -134,20 +145,27 @@
       bottom: 0;
       background: rgba(255, 255, 255, 0.9);
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      border-radius: 16px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      gap: 16px;
+      border-radius: 12px;
+      z-index: 10;
     }
 
     .loading-spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid #e2e8f0;
-      border-top: 4px solid #667eea;
+      width: 32px;
+      height: 32px;
+      border: 3px solid #e2e8f0;
+      border-top: 3px solid #0071CE;
       border-radius: 50%;
       animation: spin 1s linear infinite;
+    }
+
+    .loading-text {
+      font-size: 14px;
+      color: #4a5568;
+      font-weight: 500;
     }
 
     @keyframes spin {
@@ -155,99 +173,123 @@
       100% { transform: rotate(360deg); }
     }
 
-    .decorative-elements {
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border-radius: 50%;
-      opacity: 0.1;
-      z-index: -1;
-    }
-
-    .decorative-elements::before {
-      content: '';
-      position: absolute;
-      top: 80px;
-      left: -40px;
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-      border-radius: 50%;
-      opacity: 0.8;
-    }
-
+    /* Mobile specific optimizations */
     @media (max-width: 768px) {
-      .container {
-        padding: 20px;
-        gap: 20px;
+      .header {
+        padding: 12px 16px 16px;
       }
 
       .title {
-        font-size: 24px;
+        font-size: 18px;
       }
 
-      model-viewer {
-        height: 400px;
+      .subtitle {
+        font-size: 13px;
+      }
+
+      .main-content {
+        padding: 12px;
+        gap: 12px;
       }
 
       .controls-info {
-        gap: 15px;
+        gap: 16px;
       }
 
       .control-item {
-        padding: 8px 12px;
+        font-size: 11px;
       }
 
-      .control-text {
-        font-size: 12px;
+      .control-icon {
+        font-size: 13px;
       }
+    }
+
+    @media (max-width: 480px) {
+      .controls-info {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+      }
+
+      .controls-section {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+      }
+
+      .status-indicator {
+        align-self: flex-end;
+      }
+    }
+
+    /* Ensure proper WebView integration */
+    html, body {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    model-viewer {
+      -webkit-tap-highlight-color: transparent;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="decorative-elements"></div>
-    
     <div class="header">
-      <div class="title">🛒 3D Store Preview</div>
+      <div class="title">
+        <span>🛒</span>
+        <span>3D Store Preview</span>
+      </div>
       <div class="subtitle">Interactive store layout visualization</div>
     </div>
 
-    <div class="model-container">
-      <model-viewer 
-        src="https://expressscan-store-map.vercel.app/store.glb"
-        alt="Store Model"
-        camera-controls
-        auto-rotate
-        auto-rotate-delay="2000"
-        rotation-per-second="30deg"
-        orientation="180deg 0deg 0deg"
-        environment-image="neutral"
-        shadow-intensity="0.7"
-        exposure="1.2"
-        loading="eager"
-      >
-        <div class="loading-overlay" slot="progress-bar">
-          <div class="loading-spinner"></div>
-        </div>
-      </model-viewer>
-    </div>
+    <div class="main-content">
+      <div class="model-container">
+        <model-viewer 
+          src="https://expressscan-store-map.vercel.app/store.glb"
+          alt="Store Model"
+          camera-controls
+          auto-rotate
+          auto-rotate-delay="3000"
+          rotation-per-second="15deg"
+          orientation="180deg 0deg 0deg"
+          shadow-intensity="0.4"
+          exposure="1.0"
+          loading="eager"
+          interaction-prompt="none"
+          disable-zoom
+        >
+          <div class="loading-overlay" slot="progress-bar">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading 3D Store Model...</div>
+          </div>
+        </model-viewer>
+      </div>
 
-    <div class="controls-info">
-      <div class="control-item">
-        <div class="control-icon">🖱️</div>
-        <div class="control-text">Click & Drag to Rotate</div>
-      </div>
-      <div class="control-item">
-        <div class="control-icon">⚡</div>
-        <div class="control-text">Auto-Rotate Enabled</div>
-      </div>
-      <div class="control-item">
-        <div class="control-icon">🔍</div>
-        <div class="control-text">Scroll to Zoom</div>
+      <div class="controls-section">
+        <div class="controls-info">
+          <div class="control-item">
+            <div class="control-icon">🖱️</div>
+            <div>Drag to Rotate</div>
+          </div>
+          <div class="control-item">
+            <div class="control-icon">🔄</div>
+            <div>Auto-Rotate</div>
+          </div>
+          <div class="control-item">
+            <div class="control-icon">📱</div>
+            <div>Touch Enabled</div>
+          </div>
+        </div>
+        <div class="status-indicator">
+          <div class="status-dot"></div>
+          <div>Live</div>
+        </div>
       </div>
     </div>
   </div>
